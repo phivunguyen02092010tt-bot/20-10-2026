@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080609" />
+  <meta name="description" content="Một món quà nhỏ được tạo riêng dành cho em." />
+  <title>Một bí mật dành cho em ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --red:#ff244f; --pink:#ff6b86; --muted:#b9aeb5; }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100svh; color:#fff; font-family:"Be Vietnam Pro",sans-serif;
+      background: radial-gradient(ellipse at 50% 38%, #2a0714 0%, #10070d 35%, #050507 75%);
+      overflow-x:hidden;
+    }
+    body::before {
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.34;
+      background-image:radial-gradient(#ff9aab 0.7px,transparent 0.7px);
+      background-size:37px 37px; mask-image:linear-gradient(transparent,black 20%,transparent 90%);
+    }
+    .wrap { width:min(100% - 32px, 540px); margin:0 auto; padding:30px 0 42px; min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
+    .eyebrow { color:#ff9aaf; text-transform:uppercase; letter-spacing:.24em; font-size:.68rem; text-align:center; }
+    h1 { font-family:"Playfair Display",serif; font-size:clamp(2rem,8vw,3.15rem); font-weight:500; text-align:center; line-height:1.15; margin:13px 0 8px; }
+    .sub { color:var(--muted); text-align:center; font-size:.94rem; line-height:1.7; max-width:360px; margin:0 auto; }
+    .heart-stage { width:220px; height:210px; display:grid; place-items:center; position:relative; margin:10px auto 6px; }
+    .heart-glow { position:absolute; width:150px; height:150px; border-radius:50%; background:#ff1644; filter:blur(60px); opacity:.27; animation:glow 2.8s ease-in-out infinite; }
+    .heart { width:116px; height:116px; position:relative; transform:rotate(-45deg); background:linear-gradient(145deg,#ff4566,#b6002d 72%); filter:drop-shadow(0 0 12px #ff174c) drop-shadow(0 0 28px #e6003c66); animation:beat 1.45s ease-in-out infinite; cursor:pointer; border:0; padding:0; }
+    .heart::before,.heart::after { content:""; position:absolute; width:116px; height:116px; border-radius:50%; background:inherit; }
+    .heart::before { top:-58px; left:0; } .heart::after { top:0; left:58px; }
+    .heart-shine { position:absolute; width:32px; height:55px; top:-15px; left:27px; border-radius:50%; background:#ffb1c0; filter:blur(10px); opacity:.55; z-index:2; transform:rotate(45deg); pointer-events:none; }
+    @keyframes beat { 0%,100%{transform:rotate(-45deg) scale(1)} 9%{transform:rotate(-45deg) scale(1.08)} 18%{transform:rotate(-45deg) scale(1)} 28%{transform:rotate(-45deg) scale(1.04)} 40%{transform:rotate(-45deg) scale(1)} }
+    @keyframes glow { 0%,100%{opacity:.18;transform:scale(.9)} 50%{opacity:.42;transform:scale(1.15)} }
+    .panel { width:100%; background:linear-gradient(145deg,#ffffff0d,#ffffff05); border:1px solid #ff527333; border-radius:22px; padding:22px; box-shadow:0 18px 60px #0008,inset 0 1px #ffffff0a; backdrop-filter:blur(12px); }
+    label { display:block; color:#e8dce1; font-size:.84rem; margin:0 0 9px; }
+    input,textarea { width:100%; color:white; background:#080609b8; border:1px solid #69404b; border-radius:12px; padding:14px 15px; outline:none; font:inherit; font-size:16px; }
+    input:focus,textarea:focus { border-color:var(--pink); box-shadow:0 0 0 3px #ff42651c; }
+    .btn { width:100%; border:0; border-radius:12px; padding:14px 16px; margin-top:12px; color:white; font:600  .95rem "Be Vietnam Pro",sans-serif; background:linear-gradient(100deg,#b90031,#ff2853); cursor:pointer; box-shadow:0 8px 26px #f0003a2b; transition:transform .2s,filter .2s; }
+    .btn:hover { filter:brightness(1.12); transform:translateY(-1px); }
+    .tiny { color:#a99ba2; text-align:center; font-size:.77rem; line-height:1.65; margin:14px 0 0; }
+    .error { color:#ff9bab; min-height:1.3em; font-size:.82rem; margin:10px 0 0; }
+    .letter { display:none; width:100%; margin-top:18px; animation:rise .65s ease both; }
+    .letter.open { display:block; }
+    .letter-card { border:1px solid #ff527355; border-radius:22px; padding:24px 22px; background:linear-gradient(145deg,#240914ee,#10080ff2); box-shadow:0 0 45px #ff16441a; }
+    .letter-card h2 { font:500 1.8rem "Playfair Display",serif; color:#ff9caf; margin:0 0 14px; }
+    .letter-text { white-space:pre-wrap; line-height:1.9; color:#f6eaf0; font-size:.96rem; overflow-wrap:anywhere; }
+    .signature { font-family:"Playfair Display",serif; font-style:italic; color:#ff8da4; margin-top:20px; text-align:right; }
+    .bottom { color:#76666d; text-align:center; font-size:.72rem; margin-top:24px; }
+    .hidden { display:none !important; }
+    .qr-box { display:none; width:100%; margin-top:14px; text-align:center; border:1px solid #ff527333; border-radius:18px; padding:18px; background:#ffffff08; }
+    .qr-box.open { display:block; }
+    #qrcode { display:inline-grid; place-items:center; background:#fff; padding:10px; border-radius:10px; min-width:20px; min-height:20px; }
+    #qrcode img,#qrcode canvas { display:block; max-width:100%; height:auto; }
+    .link-input { margin-top:12px; font-size:.8rem; }
+    @keyframes rise { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    @media (max-width:420px) { .wrap{width:min(100% - 24px,540px);padding:24px 0 30px}.panel{padding:18px}.heart-stage{height:190px} }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after{animation:none!important;transition:none!important} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="eyebrow">just for one person · chỉ dành cho một người</div>
+    <h1>Một bí mật<br><em>dành cho em</em></h1>
+    <p class="sub">Có một điều anh muốn nói với em.<br>Nhưng trước tiên, hãy mở cánh cửa nhỏ này nhé.</p>
+
+    <div class="heart-stage" aria-label="Trái tim phát sáng">
+      <div class="heart-glow"></div>
+      <button class="heart" id="heartTap" aria-label="Chạm vào trái tim"><span class="heart-shine"></span></button>
+    </div>
+
+    <section class="panel" id="loginPanel">
+      <label for="password">Mật khẩu bí mật</label>
+      <input id="password" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu của em..." maxlength="128" />
+      <button class="btn" id="unlockBtn">Mở món quà ❤️</button>
+      <p class="error" id="error" role="status" aria-live="polite"></p>
+      <p class="tiny">Nếu em đang đọc được dòng này, có lẽ anh đã gửi em một điều rất đặc biệt.</p>
+    </section>
+
+    <section class="letter" id="letter" aria-live="polite">
+      <div class="letter-card">
+        <div class="eyebrow" style="text-align:left;margin-bottom:12px;letter-spacing:.16em">a letter from me</div>
+        <h2>Gửi em, người đặc biệt của anh ❤️</h2>
+        <div class="letter-text" id="letterText"></div>
+        <div class="signature">— Người luôn mong em vui</div>
+      </div>
+    </section>
+
+    <button class="btn" id="qrToggle" style="background:linear-gradient(100deg,#292027,#4a2634);box-shadow:none">Tạo mã QR cho đường dẫn này</button>
+    <section class="qr-box" id="qrBox">
+      <p class="sub" style="font-size:.85rem;margin-bottom:14px">Quét mã để mở trang này trên điện thoại khác.</p>
+      <div id="qrcode"></div>
+      <input class="link-input" id="siteUrl" type="url" placeholder="Dán đường dẫn website đã xuất bản vào đây" aria-label="Đường dẫn website" />
+      <button class="btn" id="makeQrBtn">Tạo lại mã QR</button>
+      <p class="tiny">Mã QR chỉ chứa đường dẫn, không chứa mật khẩu. Hãy chỉ chia sẻ với người bạn muốn.</p>
+    </section>
+    <div class="bottom">made with care, just for you ✦</div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const password = $("password");
+    const unlockBtn = $("unlockBtn");
+    const error = $("error");
+    const letter = $("letter");
+    const loginPanel = $("loginPanel");
+    let busy = false;
+
+    async function unlock() {
+      if (busy) return;
+      const value = password.value;
+      if (!value.trim()) { error.textContent = "Em hãy nhập mật khẩu trước nhé."; password.focus(); return; }
+      busy = true; unlockBtn.disabled = true; unlockBtn.textContent = "Đang mở món quà..."; error.textContent = "";
+      try {
+        const response = await fetch("/.netlify/functions/unlock", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: value })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || "Mật khẩu chưa đúng. Thử lại nhé.");
+        $("letterText").textContent = data.message || "Anh chưa viết lời nhắn. Hãy thêm lời nhắn trong cài đặt website nhé.";
+        loginPanel.classList.add("hidden");
+        letter.classList.add("open");
+        $("qrToggle").textContent = "Tạo mã QR cho đường dẫn này";
+        letter.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (e) {
+        error.textContent = e.message || "Chưa thể mở thư. Hãy thử lại sau nhé.";
+      } finally {
+        busy = false; unlockBtn.disabled = false; unlockBtn.textContent = "Mở món quà ❤️";
+      }
+    }
+    unlockBtn.addEventListener("click", unlock);
+    password.addEventListener("keydown", e => { if (e.key === "Enter") unlock(); });
+    $("heartTap").addEventListener("click", () => {
+      document.querySelector(".heart-stage").animate(
+        [{transform:"scale(1)"},{transform:"scale(1.12)"},{transform:"scale(1)"}],
+        {duration:500,easing:"ease-out"}
+      );
+      password.focus({ preventScroll:true });
+    });
+    $("qrToggle").addEventListener("click", () => {
+      $("qrBox").classList.toggle("open");
+      if ($("qrBox").classList.contains("open")) {
+        $("siteUrl").value = location.origin.startsWith("http") ? location.origin : "";
+        if ($("siteUrl").value) makeQr();
+        $("qrBox").scrollIntoView({behavior:"smooth",block:"nearest"});
+      }
+    });
+    function makeQr() {
+      const url = $("siteUrl").value.trim();
+      $("qrcode").innerHTML = "";
+      if (!url || !/^https?:\/\//i.test(url)) {
+        $("qrcode").textContent = "Hãy nhập đường dẫn https:// sau khi xuất bản website.";
+        return;
+      }
+      if (typeof QRCode === "undefined") {
+        $("qrcode").textContent = "Không tải được thư viện QR. Hãy thử tải lại trang.";
+        return;
+      }
+      new QRCode($("qrcode"), {text:url, width:190, height:190, colorDark:"#14070b", colorLight:"#ffffff", correctLevel:QRCode.CorrectLevel.H});
+    }
+    $("makeQrBtn").addEventListener("click", makeQr);
+  </script>
+</body>
+</html>
